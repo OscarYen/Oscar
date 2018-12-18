@@ -1,0 +1,121 @@
+# Oscar
+
+
+class annalViewController: UIViewController,UIImagePickerControllerDelegate,
+UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource {
+    
+    var list1  = ["北投區","文山區","內湖區","信義區",
+           "士林區","中山區","南港區"]
+        var place1  = ["忠義山步道","下青礐步道","郵政訓練所步道","中正山親山步道","軍艦岩步道","水尾巴拉卡步道","泉源里紗帽步道"]
+        var place2  = ["仙跡岩步道1號路線","仙跡岩步道2號路線" ,"仙跡岩步道試院支線","仙跡岩步道麥田支線","指南宮步道",
+            "飛龍步道","樟樹步道","樟湖步道","猴山岳步道"]
+        var place3  = ["大崙頭山步道","金面山步道","忠勇山步道","忠勇山越嶺步道","龍船岩步道","鯉魚山步道"
+          , "圓覺寺步道","大溝溪畔步道", "碧湖步道","白鷺鷥山步道"]
+       var place4  = ["拇指山步道","虎山奉天宮步道","虎山120高地步道","虎山吉福宮步道","虎山生態步道","虎山自然步道"
+            ,"虎山山腰步道","虎山溪步道","象山永春崗步道","象山北星寶宮步道","象山一線天步道"]
+        var place5 = ["水管路步道","下竹林步道","婆婆橋步道","大崙頭山森林步道","大崙頭山自然步道"]
+       var place6  = ["劍潭山步道主線","劍潭山步道劍潭公園副線"]
+        var place7  = ["示範茶廠環山步道","桂花吊橋步道","更寮步道","栳寮步道","中華技術學院步道","九五峰步道"]
+    var region : String = "北投區"
+    var mountain : String = "忠義山步道"
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+   
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch(component){
+        case 0:
+            return list1.count
+        case 1:
+            switch region {
+            case "北投區":
+                return place1.count
+            case "文山區":
+                return place2.count
+            case "內湖區":
+                return place3.count
+            case "信義區":
+                return place4.count
+            case "士林區":
+                return place5.count
+            case "中山區":
+                return place6.count
+            case "南港區":
+                return place7.count
+            default:
+                return 0
+        }
+        default:
+            return 0
+    
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch(component){
+        case 0:
+            return list1[row]
+        case 1:
+            switch region {
+            case "北投區":
+                return place1[row]
+            case "文山區":
+                return place2[row]
+            case "內湖區":
+                return place3[row]
+            case "信義區":
+                return place4[row]
+            case "士林區":
+                return place5[row]
+            case "中山區":
+                return place6[row]
+            case "南港區":
+                return place7[row]
+            default:
+                return nil
+            }
+        default:
+            return nil
+            }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            region = list1[row]
+            updateMountain(0)
+            print("\(region)  \(mountain)")
+            pickerView.reloadAllComponents()
+            pickerView.selectRow(0, inComponent: 1, animated: true)
+        case 1:
+            updateMountain(row)
+            print("\(region)  \(mountain)")
+            pickerView.reloadAllComponents() 
+        default:
+            print("無")
+        }
+    }
+    func updateMountain(_ row: Int){
+        switch region {
+        case "北投區":
+           mountain = place1[row]
+        case "文山區":
+             mountain = place2[row]
+        case "內湖區":
+             mountain = place3[row]
+        case "信義區":
+             mountain = place4[row]
+        case "士林區":
+             mountain = place5[row]
+        case "中山區":
+             mountain = place6[row]
+        case "南港區":
+             mountain = place7[row]
+        default:
+            print("無")
+        }
+        }
